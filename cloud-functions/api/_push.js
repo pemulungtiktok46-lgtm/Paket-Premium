@@ -126,7 +126,7 @@ async function deliverPush(matchField, matchValue, payload) {
       await webpush.sendNotification(
         item.subscription,
         JSON.stringify(payload),
-        { TTL: 3600, urgency: "high" }
+        { TTL: 21600, urgency: "high" }
       );
       sent += 1;
     } catch (error) {
