@@ -1,3 +1,4 @@
+
 name: Build Agen Suatu APK
 
 on:
@@ -13,12 +14,17 @@ jobs:
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: 17
-
-      - uses: android-actions/setup-android@v3
+          java-version: '17'
 
       - name: Install Android build tools
-        run: sdkmanager "build-tools;35.0.0"
+        run: |
+          SDKMANAGER=$(find "$ANDROID_HOME/cmdline-tools" -name sdkmanager -type f | head -n 1)
+          if [ -z "$SDKMANAGER" ]; then
+            echo "SDK Manager tidak ditemukan"
+            exit 1
+          fi
+          yes | "$SDKMANAGER" --licenses || true
+          "$SDKMANAGER" "build-tools;35.0.0"
 
       - name: Sign APK
         run: |
@@ -37,7 +43,7 @@ jobs:
             -keypass AgenSuatu2026 \
             -dname "CN=Agen Suatu"
 
-          $ANDROID_HOME/build-tools/35.0.0/apksigner sign \
+          "$ANDROID_HOME/build-tools/35.0.0/apksigner" sign \
             --ks agen-suatu.keystore \
             --ks-key-alias agensuatu \
             --ks-pass pass:AgenSuatu2026 \
