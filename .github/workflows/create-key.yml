@@ -1,0 +1,33 @@
+
+name: Create Permanent Keystore
+
+on:
+  workflow_dispatch:
+
+jobs:
+  create:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate keystore
+        env:
+          PASS: ${{ secrets.KEYSTORE_PASSWORD }}
+        run: |
+          keytool -genkeypair -v \
+            -keystore agen-suatu-release.jks \
+            -alias agensuatu \
+            -keyalg RSA -keysize 2048 \
+            -validity 10000 \
+            -storepass "$PASS" \
+            -keypass "$PASS" \
+            -dname "CN=Agen Suatu"
+
+          keytool -list -v \
+            -keystore agen-suatu-release.jks \
+            -storepass "$PASS" \
+            -alias agensuatu
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Agen-Suatu-Keystore
+          path: agen-suatu-release.jks
+          retention-days: 90
