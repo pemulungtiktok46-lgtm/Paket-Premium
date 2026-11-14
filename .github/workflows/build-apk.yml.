@@ -1,0 +1,43 @@
+
+name: Build Agen Suatu APK
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Install Android build tools
+        run: |
+          yes | sdkmanager --licenses || true
+          sdkmanager "build-tools;35.0.0"
+
+      - name: Sign APK with permanent key
+        env:
+          KEY_B64: ${{ secrets.KEYSTORE_BASE64 }}
+          KEY_PASS: ${{ secrets.KEYSTORE_PASSWORD }}
+        run: |
+          echo "$KEY_B64" | base64 -d > agen-suatu-release.jks
+
+          APK=$(find . -maxdepth 1 -iname '*unsigned*.apk' -print -quit)
+          test -n "$APK" || { echo "APK tidak ditemukan"; exit 1; }
+
+          "$ANDROID_HOME/build-tools/35.0.0/apksigner" sign \
+            --ks agen-suatu-release.jks \
+            --ks-key-alias agensuatu \
+            --ks-pass env:KEY_PASS \
+            --key-pass env:KEY_PASS \
+            --out Agen-Suatu.apk "$APK"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Agen-Suatu-APK
+          path: Agen-Suatu.apk
