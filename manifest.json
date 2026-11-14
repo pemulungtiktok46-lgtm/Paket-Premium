@@ -1,9 +1,9 @@
 
 {
   "id": "/",
-  "name": "Paket Premium",
-  "short_name": "Paket Premium",
-  "description": "Aplikasi layanan Paket Premium",
+  "name": "Agen Suatu",
+  "short_name": "Agen Suatu",
+  "description": "Aplikasi Agen Suatu",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
@@ -12,13 +12,7 @@
   "theme_color": "#00c853",
   "icons": [
     {
-      "src": "/icons/icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "/icons/icon-512.png",
+      "src": "/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
