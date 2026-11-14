@@ -9,7 +9,7 @@ import {
   getTelegramWebhookSecret,
   getTelegramWebhookUrl
 } from './_shared.js';
-import { sendOrderPush, sendTopupPush } from './_push.js';
+import { sendOrderPush, sendOrderPaymentPush, sendTopupPush } from './_push.js';
 
 export async function onRequest({ request, env }) {
   const method = String(request.method || 'GET').toUpperCase();
@@ -281,6 +281,11 @@ export async function onRequest({ request, env }) {
   if (orderId && status) {
     await sendOrderPush(orderId, status, handler, now).catch(error => {
       console.warn('Web Push pesanan gagal:', String(error?.message || error).slice(0, 160));
+    });
+  }
+  if (orderId && paymentStatus === 'lunas') {
+    await sendOrderPaymentPush(orderId, now).catch(error => {
+      console.warn('Web Push pelunasan gagal:', String(error?.message || error).slice(0, 160));
     });
   }
   if (topupId) {
