@@ -138,7 +138,7 @@ async function deliverPush(matchField, matchValue, payload) {
   const results = await Promise.allSettled(targets.map(async ([key, item]) => {
     try {
       await webpush.sendNotification(item.subscription, JSON.stringify(payload), {
-        TTL: 180,
+        TTL: 21600, // simpan hingga 6 jam saat perangkat sementara offline
         urgency: 'high'
       });
       return { key, ok: true };
