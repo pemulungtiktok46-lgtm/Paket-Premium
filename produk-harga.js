@@ -227,7 +227,12 @@ var PRODUCTS = {
   byu: {
     pulsa: genPulsa(),
     harian: [
-      { name: "10GB 1 Hari (List Promo)", gb: "10GB", hari: "1 Hari", harga: 10000, label: "Rp10.000", tag: "Promo" },
+      { name: "Unlimited 6 Jam (List Promo)", gb: "Unlimited", hari: "6 Jam", harga: 5000, label: "Rp5.000", tag: "Super irit" },
+      { name: "unlimited 12 Jam (List Promo)", gb: "Unlimited", hari: "12 Jam", harga: 7000, label: "Rp7.000", tag: "Super irit" },
+      { name: "unlimited 24 Jam (List Promo)", gb: "Unlimited", hari: "24 Jam", harga: 10000, label: "Rp10.000", tag: "SEPUASNYA" },
+      { name: "Jajan 10Gb 1Hari(List Promo)", gb: "10Gb", hari: "1 Hari", harga: 10000, label: "Rp10.000", tag: "Dijamin Masuk" },
+      { name: "unlimited 2 Hari (List Promo)", gb: "Unlimited", hari: "2 Hari", harga: 15000, label: "Rp15.000", tag: "Promo Nomer Tertentu" },
+      { name: "unlimited 3 Hari (List Promo)", gb: "Unlimited", hari: "3 Hari", harga: 13000, label: "Rp13.000", tag: "Promo" },
       { name: "8GB 3 Hari", gb: "8GB", hari: "3 Hari", harga: 15000, label: "Rp15.000" },
       { name: "5GB 7 Hari", gb: "5GB", hari: "7 Hari", harga: 17000, label: "Rp17.000" },
 
